@@ -25,7 +25,7 @@ public class Sala {
 	public String getComputadores() {
 		String msg = "";
 		for (int i = 0; i < computadores.size(); i++) {
-			msg += computadores.get(i).toString() + "\n";
+			msg += "\n" + computadores.get(i).toString();
 		}
 		return msg;
 	}
@@ -36,7 +36,7 @@ public class Sala {
 				return computadores.get(i);
 			}
 		}
-		return new Computador(null, null, 0);
+		return null;
 	}
 
 	public void updateComputador(Computador pc) {

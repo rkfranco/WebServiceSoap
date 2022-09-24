@@ -33,7 +33,7 @@ public class Computador {
 	}
 
 	public void setModelo(String modelo) {
-		if (modelo.isEmpty()) {
+		if (modelo.equals(null) || modelo.isEmpty()) {
 			throw new IllegalArgumentException();
 		}
 		this.modelo = modelo;
@@ -44,7 +44,7 @@ public class Computador {
 	}
 
 	public void setMarca(String marca) {
-		if (marca.isEmpty()) {
+		if (marca.equals(null) || marca.isEmpty()) {
 			throw new IllegalArgumentException();
 		}
 		this.marca = marca;
@@ -54,16 +54,24 @@ public class Computador {
 		return defeitos;
 	}
 
+	public String getStringDefeitos() {
+		if (defeitos.size() == 0)
+			return "Não há defeitos";
+		String msg = "";
+		for (String def : defeitos) {
+			msg += "\n" + def;
+		}
+		return msg;
+	}
+
 	public void addDefeitos(String defeito) {
-		if (!defeito.isEmpty()) {
+		if (!(defeito.equals(null) || defeito.isEmpty())) {
 			defeitos.add(defeito);
 		}
 	}
 
-	public void removeDefeitos(int id) {
-		if (id >= 0 && id < defeitos.size()) {
-			defeitos.remove(id);
-		}
+	public void removeDefeitos() {
+		this.defeitos = new ArrayList<String>();
 	}
 
 	public int getSession() {
@@ -71,7 +79,7 @@ public class Computador {
 	}
 
 	public void setSession(int session) {
-		if (session < 0) {
+		if (session >= 0) {
 			this.session = session;
 		} else {
 			throw new IllegalArgumentException();
@@ -87,6 +95,12 @@ public class Computador {
 			throw new IllegalArgumentException();
 		}
 		this.sala = sala;
+	}
+
+	@Override
+	public String toString() {
+		return "modelo: " + this.modelo + " | marca: " + this.marca + " | seção: " + this.session + " | id: " + this.id
+				+ "\ndefeitos: " + this.getStringDefeitos();
 	}
 
 }

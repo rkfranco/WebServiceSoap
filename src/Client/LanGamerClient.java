@@ -16,14 +16,49 @@ public class LanGamerClient {
 
 		controller.postSala(1);
 		controller.postSala(2);
+		controller.postSala(2);
 
-		System.out.println("Sala 1: "+controller.getComputadoresSala(1));
-		System.out.println("Sala 2: "+controller.getComputadoresSala(2));
 		
-//		controller.postComputador("HB20", "Acer", 1, 1);
-		controller.postComputador("GOL", "Acer", 2, 1);
-		controller.postComputador("Celta", "Dell", 3, 2);
+		System.out.println("-------------------------------------");
 		System.out.println("Sala 2: " + controller.getComputadoresSala(2));
+		System.out.println("");
 		System.out.println("Sala 1: " + controller.getComputadoresSala(1));
+		System.out.println("");
+
+		controller.postComputador("HB20", "Acer", 1, 1);
+		controller.postComputador("GOL", "Acer", 2, 2);
+		controller.postComputador("Celta", "Dell", 3, 2);
+
+		System.out.println("-------------------------------------");
+		System.out.println("Sala 2: " + controller.getComputadoresSala(2));
+		System.out.println("");
+		System.out.println("Sala 1: " + controller.getComputadoresSala(1));
+		System.out.println("");
+
+		controller.startSession(1);
+		controller.addDefeito("Teclas grudentas", 1);
+		controller.addDefeito("Tela trincada", 1);
+		controller.startSession(2);
+		controller.startSession(3);
+
+		System.out.println("START");
+		System.out.println("-------------------------------------");
+		System.out.println("Sala 2: " + controller.getComputadoresSala(2));
+		System.out.println("");
+		System.out.println("Sala 1: " + controller.getComputadoresSala(1));
+		System.out.println("");
+
+		controller.limpaDefeitos(1);
+		controller.endSession(1);
+		controller.endSession(2);
+		controller.endSession(3);
+
+		System.out.println("-------------------------------------");
+		System.out.println("END");
+		System.out.println("Sala 2: " + controller.getComputadoresSala(2));
+		System.out.println("");
+		System.out.println("Sala 1: " + controller.getComputadoresSala(1));
+		System.out.println("");
+
 	}
 }
