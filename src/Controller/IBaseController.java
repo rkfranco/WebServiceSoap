@@ -10,9 +10,6 @@ import Model.Computador;
 @WebService
 @SOAPBinding(style = Style.RPC)
 public interface IBaseController {
-
-	// Add String ou boolean de retorno para todos os métodos put, post e delete;
-	// Add mais coisas a classe sala (está muito simples) Ex: número max de pcs, responsável pela sala;
 	
 	@WebMethod
 	String getComputadoresSala(int id);
@@ -21,14 +18,13 @@ public interface IBaseController {
 	String getSala();
 	
 	@WebMethod
-	void postSala(int id);
+	String postSala(int id, String responsavelSala, int numMaxComputadores);
 
 	@WebMethod
-	void putSala(int id);
+	String putSala(int id, String responsavelSala, int numMaxComputadores);
 
 	@WebMethod
-	void deleteSala(int id);
-
+	String deleteSala(int id);
 	
 	@WebMethod
 	String getComputador(int id);
@@ -37,10 +33,10 @@ public interface IBaseController {
 	String postComputador(String modelo, String marca, int id, int idSala);
 
 	@WebMethod
-	void putComputador(String modelo, String marca, int id);
+	String putComputador(String modelo, String marca, int id);
 
 	@WebMethod
-	void deleteComputador(int id);
+	String deleteComputador(int id);
 
 	@WebMethod
 	int startSession(int id);
@@ -53,5 +49,4 @@ public interface IBaseController {
 
 	@WebMethod
 	void limpaDefeitos(int id);
-
 }

@@ -15,7 +15,7 @@ public class LanGamerControllerImpl implements IBaseController {
 
 	@Override
 	public String getComputadoresSala(int id) {
-		String msg = "Sala não encontrada";
+		String msg = "Sala nao encontrada";
 		for (int i = 0; i < salas.size(); i++) {
 			if (salas.get(i).getId() == id) {
 				msg = salas.get(i).getComputadores();
@@ -25,37 +25,41 @@ public class LanGamerControllerImpl implements IBaseController {
 	}
 
 	@Override
-	public void postSala(int id) {
+	public String postSala(int id, String responsavelSala, int numMaxComputadores) {
 		boolean repetido = false;
 		for (int i = 0; i < salas.size(); i++) {
 			if (salas.get(i).getId() == id) {
 				repetido = true;
+				return "Sala ja cadastrada";
 			}
 		}
 		if (!repetido) {
-			salas.add(new Sala(id));
+			salas.add(new Sala(id, responsavelSala, numMaxComputadores));
 		}
-	}
-
-	// add número maximo de pcs
-	@Override
-	public void putSala(int id) {
-		for (int i = 0; i < salas.size(); i++) {
-			if (salas.get(i).getId() == id) {
-				salas.remove(i);
-				salas.add(new Sala(id));
-
-			}
-		}
+		return "Sala inserida com sucesso";
 	}
 
 	@Override
-	public void deleteSala(int id) {
+	public String putSala(int id, String responsavelSala, int numMaxComputadores) {
 		for (int i = 0; i < salas.size(); i++) {
 			if (salas.get(i).getId() == id) {
 				salas.remove(i);
+				salas.add(new Sala(id, responsavelSala, numMaxComputadores));
+				return "Sala atualizada com sucesso";
 			}
 		}
+		return "Sala nao encontrada";
+	}
+
+	@Override
+	public String deleteSala(int id) {
+		for (int i = 0; i < salas.size(); i++) {
+			if (salas.get(i).getId() == id) {
+				salas.remove(i);
+				return "Sala removida com sucesso";
+			}
+		}
+		return "Sala nao encontrada";
 	}
 
 	@Override
@@ -71,54 +75,57 @@ public class LanGamerControllerImpl implements IBaseController {
 				}
 			}
 		}
-		return "Computador não encontrado";
+		return "Computador nao encontrado";
 	}
 
 	@Override
 	public String postComputador(String modelo, String marca, int id, int idSala) {
 		Computador pc;
-		// Pela lista se privada o cliente não consegue ter acesso as informações, e por
-		// isso dá erro de null exception.
+		// Pela lista se privada o cliente nao consegue ter acesso as informacoes, e por
+		// isso da erro de null exception.
 		LinkedList<Computador> listaPc;
 		for (int i = 0; i < salas.size(); i++) {
 			listaPc = salas.get(i).getComputeresLista();
 			for (int j = 0; j < listaPc.size(); j++) {
 				pc = listaPc.get(j);
 				if (pc != null && pc.getId() == id) {
-					return "ID já cadastrado";
+					return "ID ja cadastrado";
 				}
 			}
 		}
 		for (int i = 0; i < salas.size(); i++) {
-			if (salas.get(i).getId() == idSala) {
+			if (salas.get(i).getId() == idSala && !(salas.get(i).getComputadoresAsLinkedList().size() >= salas.get(i).getNumMaxComputadores())) {
 				salas.get(i).addComputador(new Computador(modelo, marca, id));
 				return "Cadastro realizado com sucesso";
 			}
 		}
-		return "Ocorreu um erro ao cadastrar o computador";
+		return "Ocorreu um erro ao cadastrar o computador, verificar existencia da sala, ou seu numero maximo de computadores permitidos";
 	}
 
 	@Override
-	public void putComputador(String modelo, String marca, int id) {
+	public String putComputador(String modelo, String marca, int id) {
 		for (int i = 0; i < salas.size(); i++) {
 			for (int j = 0; j < salas.get(i).getComputeresLista().size(); j++) {
 				if (salas.get(i).getComputadorById(j).getId() == id) {
 					salas.get(i).updateComputador(new Computador(modelo, marca, id));
+					return "Computador atualizado com sucesso";
 				}
 			}
 		}
+		return "Computador nao encontrado";
 	}
 
 	@Override
-	public void deleteComputador(int id) {
+	public String deleteComputador(int id) {
 		for (int i = 0; i < salas.size(); i++) {
 			for (int j = 0; j < salas.get(i).getComputeresLista().size(); j++) {
 				if (salas.get(i).getComputadorById(j).getId() == id) {
 					salas.get(i).getComputeresLista().remove(j);
+					return "Computador removido com sucesso";
 				}
 			}
 		}
-
+		return "Computador nao encontrado";
 	}
 
 	private boolean checkSession(int session) {
@@ -214,5 +221,4 @@ public class LanGamerControllerImpl implements IBaseController {
 		}
 		return s;
 	}
-
 }

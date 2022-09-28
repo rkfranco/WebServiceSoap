@@ -14,9 +14,9 @@ public class LanGamerClient {
 		Service ws = Service.create(url, qname);
 		IBaseController controller = ws.getPort(IBaseController.class);
 
-		controller.postSala(1);
-		controller.postSala(2);
-		controller.postSala(2);
+		controller.postSala(1, "Alexandre", 0);
+		controller.postSala(2, "Rodrigo", 5);
+		controller.postSala(3, "Joshua", 15);
 
 		
 		System.out.println("-------------------------------------");

@@ -2,7 +2,6 @@ package Publisher;
 
 import javax.xml.ws.Endpoint;
 
-import Controller.IBaseController;
 import Controller.LanGamerControllerImpl;
 
 public class LanGamerPublisher {
