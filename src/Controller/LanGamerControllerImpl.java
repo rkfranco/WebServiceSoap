@@ -81,8 +81,6 @@ public class LanGamerControllerImpl implements IBaseController {
 	@Override
 	public String postComputador(String modelo, String marca, int id, int idSala) {
 		Computador pc;
-		// Pela lista se privada o cliente nao consegue ter acesso as informacoes, e por
-		// isso da erro de null exception.
 		LinkedList<Computador> listaPc;
 		for (int i = 0; i < salas.size(); i++) {
 			listaPc = salas.get(i).getComputeresLista();

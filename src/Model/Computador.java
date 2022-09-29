@@ -23,7 +23,7 @@ public class Computador {
 
 	public void setId(int id) {
 		if (id <= 0) {
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException("Id informado deve ser maior que 0");
 		}
 		this.id = id;
 	}
@@ -34,7 +34,7 @@ public class Computador {
 
 	public void setModelo(String modelo) {
 		if (modelo.equals(null) || modelo.isEmpty()) {
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException("Modelo informado nulo ou invalido");
 		}
 		this.modelo = modelo;
 	}
@@ -45,7 +45,7 @@ public class Computador {
 
 	public void setMarca(String marca) {
 		if (marca.equals(null) || marca.isEmpty()) {
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException("Marca informada nula ou invalida");
 		}
 		this.marca = marca;
 	}
@@ -82,7 +82,7 @@ public class Computador {
 		if (session >= 0) {
 			this.session = session;
 		} else {
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException("Sessao informada deve ser maior que 0");
 		}
 	}
 
@@ -92,7 +92,7 @@ public class Computador {
 
 	public void setSala(Sala sala) {
 		if (sala == null) {
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException("Sala informada nula ou invalida");
 		}
 		this.sala = sala;
 	}

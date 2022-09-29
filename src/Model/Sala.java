@@ -1,6 +1,5 @@
 package Model;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class Sala {
@@ -22,7 +21,7 @@ public class Sala {
 
 	public void setId(int id) {
 		if (id <= 0) {
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException("Id informado deve ser maior que 0");
 		}
 		this.id = id;
 	}
@@ -32,9 +31,9 @@ public class Sala {
 	}
 	
 	public void setResponsavelSala(String responsavelSala) {
-		if (!responsavelSala.isEmpty() && !responsavelSala.equals(null))
-			this.responsavelSala = responsavelSala;
-		throw new IllegalArgumentException();
+		if (responsavelSala.isEmpty() || responsavelSala.equals(null))
+			throw new IllegalArgumentException("Responsavel pela sala informado nulo ou invalido");
+		this.responsavelSala = responsavelSala;
 	}
 	
 	public int getNumMaxComputadores() {
@@ -42,9 +41,9 @@ public class Sala {
 	}
 	
 	public void setNumMaxComputadores(int numMaxComputadores) {
-		if (numMaxComputadores > 0)
-			this.numMaxComputadores = numMaxComputadores;
-		throw new IllegalArgumentException();
+		if (numMaxComputadores <= 0)
+			throw new IllegalArgumentException("Numero maximo de computadores informado deve ser maior que 0");
+		this.numMaxComputadores = numMaxComputadores;
 	}
 
 	public String getComputadores() {
@@ -83,7 +82,7 @@ public class Sala {
 
 	public void addComputador(Computador computador) {
 		if (computador == null) {
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException("Computador informado nulo ou invalido");
 		}
 		this.computadores.add(computador);
 	}
