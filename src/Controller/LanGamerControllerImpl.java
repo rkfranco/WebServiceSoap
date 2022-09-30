@@ -55,8 +55,12 @@ public class LanGamerControllerImpl implements IBaseController {
 	public String deleteSala(int id) {
 		for (int i = 0; i < salas.size(); i++) {
 			if (salas.get(i).getId() == id) {
-				salas.remove(i);
-				return "Sala removida com sucesso";
+				if (salas.get(i).getComputeresLista().size() != 0) {
+					return "Sala nao removida, ainda ha computadores dentro";
+				} else {
+					salas.remove(i);
+					return "Sala removida com sucesso";
+				}
 			}
 		}
 		return "Sala nao encontrada";
@@ -92,7 +96,8 @@ public class LanGamerControllerImpl implements IBaseController {
 			}
 		}
 		for (int i = 0; i < salas.size(); i++) {
-			if (salas.get(i).getId() == idSala && !(salas.get(i).getComputadoresAsLinkedList().size() >= salas.get(i).getNumMaxComputadores())) {
+			if (salas.get(i).getId() == idSala
+					&& !(salas.get(i).getComputeresLista().size() >= salas.get(i).getNumMaxComputadores())) {
 				salas.get(i).addComputador(new Computador(modelo, marca, id));
 				return "Cadastro realizado com sucesso";
 			}
@@ -115,10 +120,14 @@ public class LanGamerControllerImpl implements IBaseController {
 
 	@Override
 	public String deleteComputador(int id) {
+		Sala sala;
+		LinkedList<Computador> listaPc;
 		for (int i = 0; i < salas.size(); i++) {
-			for (int j = 0; j < salas.get(i).getComputeresLista().size(); j++) {
-				if (salas.get(i).getComputadorById(j).getId() == id) {
-					salas.get(i).getComputeresLista().remove(j);
+			sala = salas.get(i);
+			listaPc = sala.getComputeresLista();
+			for (int j = 0; j < listaPc.size(); j++) {
+				if (listaPc.get(j).getId() == id) {
+					sala.getComputeresLista().remove(j);
 					return "Computador removido com sucesso";
 				}
 			}
@@ -182,7 +191,7 @@ public class LanGamerControllerImpl implements IBaseController {
 	}
 
 	@Override
-	public void addDefeito(String defeito, int id) {
+	public boolean addDefeito(String defeito, int id) {
 		Computador pc;
 		for (int i = 0; i < salas.size(); i++) {
 			Sala s = salas.get(i);
@@ -190,13 +199,15 @@ public class LanGamerControllerImpl implements IBaseController {
 				pc = s.getComputeresLista().get(j);
 				if (pc.getId() == id) {
 					pc.addDefeitos(defeito);
+					return true;
 				}
 			}
 		}
+		return false;
 	}
 
 	@Override
-	public void limpaDefeitos(int id) {
+	public boolean limpaDefeitos(int id) {
 		Computador pc;
 		for (int i = 0; i < salas.size(); i++) {
 			Sala s = salas.get(i);
@@ -204,9 +215,11 @@ public class LanGamerControllerImpl implements IBaseController {
 				pc = s.getComputeresLista().get(j);
 				if (pc.getId() == id) {
 					pc.removeDefeitos();
+					return true;
 				}
 			}
 		}
+		return false;
 	}
 
 	@Override

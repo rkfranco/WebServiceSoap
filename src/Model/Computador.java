@@ -56,7 +56,7 @@ public class Computador {
 
 	public String getStringDefeitos() {
 		if (defeitos.size() == 0)
-			return "N�o h� defeitos";
+			return "Nao ha defeitos";
 		String msg = "";
 		for (String def : defeitos) {
 			msg += "\n" + def;
@@ -99,7 +99,7 @@ public class Computador {
 
 	@Override
 	public String toString() {
-		return "modelo: " + this.modelo + " | marca: " + this.marca + " | se��o: " + this.session + " | id: " + this.id
+		return "modelo: " + this.modelo + " | marca: " + this.marca + " | servico: " + this.session + " | id: " + this.id
 				+ "\ndefeitos: " + this.getStringDefeitos();
 	}
 }

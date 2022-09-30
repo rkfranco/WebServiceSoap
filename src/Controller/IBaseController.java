@@ -45,8 +45,8 @@ public interface IBaseController {
 	int endSession(int id);
 
 	@WebMethod
-	void addDefeito(String defeito, int id);
+	boolean addDefeito(String defeito, int id);
 
 	@WebMethod
-	void limpaDefeitos(int id);
+	boolean limpaDefeitos(int id);
 }

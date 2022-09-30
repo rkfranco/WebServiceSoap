@@ -14,11 +14,10 @@ public class LanGamerClient {
 		Service ws = Service.create(url, qname);
 		IBaseController controller = ws.getPort(IBaseController.class);
 
-		controller.postSala(1, "Alexandre", 0);
+		controller.postSala(1, "Alexandre", 2);
 		controller.postSala(2, "Rodrigo", 5);
-		controller.postSala(3, "Joshua", 15);
+		System.out.println(controller.postSala(3, "Joshua", 15));
 
-		
 		System.out.println("-------------------------------------");
 		System.out.println("Sala 2: " + controller.getComputadoresSala(2));
 		System.out.println("");
@@ -35,6 +34,8 @@ public class LanGamerClient {
 		System.out.println("Sala 1: " + controller.getComputadoresSala(1));
 		System.out.println("");
 
+		controller.postComputador("Audi R8", "IBM", 4, 1);
+		System.out.println(controller.postComputador("Onix", "Positivo", 5, 1)); 
 		controller.startSession(1);
 		controller.addDefeito("Teclas grudentas", 1);
 		controller.addDefeito("Tela trincada", 1);
@@ -53,6 +54,18 @@ public class LanGamerClient {
 		controller.endSession(2);
 		controller.endSession(3);
 
+		System.out.println("-------------------------------------");
+		System.out.println("END");
+		System.out.println("Sala 2: " + controller.getComputadoresSala(2));
+		System.out.println("");
+		System.out.println("Sala 1: " + controller.getComputadoresSala(1));
+		System.out.println("");
+		
+		System.out.println(controller.deleteSala(1));
+		System.out.println(controller.deleteComputador(1));
+		System.out.println(controller.deleteComputador(4));
+		System.out.println(controller.deleteSala(1));
+		
 		System.out.println("-------------------------------------");
 		System.out.println("END");
 		System.out.println("Sala 2: " + controller.getComputadoresSala(2));

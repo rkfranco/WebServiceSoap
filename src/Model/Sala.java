@@ -25,21 +25,21 @@ public class Sala {
 		}
 		this.id = id;
 	}
-	
+
 	public String getReponsavelSala() {
 		return this.responsavelSala;
 	}
-	
+
 	public void setResponsavelSala(String responsavelSala) {
 		if (responsavelSala.isEmpty() || responsavelSala.equals(null))
 			throw new IllegalArgumentException("Responsavel pela sala informado nulo ou invalido");
 		this.responsavelSala = responsavelSala;
 	}
-	
+
 	public int getNumMaxComputadores() {
 		return this.numMaxComputadores;
 	}
-	
+
 	public void setNumMaxComputadores(int numMaxComputadores) {
 		if (numMaxComputadores <= 0)
 			throw new IllegalArgumentException("Numero maximo de computadores informado deve ser maior que 0");
@@ -52,10 +52,6 @@ public class Sala {
 			msg += "\n" + computadores.get(i).toString();
 		}
 		return msg;
-	}
-	
-	public LinkedList<Computador> getComputadoresAsLinkedList() {
-		return computadores;
 	}
 
 	public Computador getComputadorById(int id) {
